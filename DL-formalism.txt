@@ -1,0 +1,45 @@
+ENTITIES
+             DL       OWL
+  TBox:   Concepts  (class)        ROBOT
+  ABox:   Instances (individual)    R1
+  RBox:   Roles     (properties)   isIn
+
+--------------------------------------------
+
+AXIOMS
+	DL-FORMALIMS
+ABOX 
+       classify    R1:ROBOT
+object property   (R1,X):isIn,         X:LOCATION
+data   property   (S,10):hasDiameter,  S:SPHERE,  (10:REAL)
+
+TBOX
+   sub-sumption   ROOM ⊑ LOCATION    (logic implication)
+    restruction   SPHERE = hasDiameter.REAL
+    cardinality   CORRIDOR = >1 hasDoor.DOOR
+                             <n
+                             =n
+                            some
+                            only
+
+RBOX
+   sub-sumption   isDone ⊑ is    (logic implication)
+          range   given (A,B):r the domain A
+         domain   given (A,B):r the range B
+
+---------------------------------------------
+
+Cluedo example
+  0. Load the ontology
+  1. Add axioms on ABOX   
+       (Tom, Livingroom):where,        (Tom:PERSON, Livingroom:PLACE)
+  2. update the reasoner
+  3. query consistent hypotesis
+  4. query what, where, who.
+
+
+
+
+          
+
+
