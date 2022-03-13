@@ -1,0 +1,2 @@
+Decido di inserire la generazione randomica a differenza degli scorsi assignment all'interno di fsm, 
+idem per la definizione delle stanze

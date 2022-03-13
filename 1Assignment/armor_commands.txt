@@ -1,0 +1,124 @@
+
+// 1. RUN aRMOR SERVICE IN A DEDICATED TERMINAL
+rosrun armor execute it.emarolab.armor.ARMORMainService
+
+// 2. LOAD ONTOLOGY FROM FILE WITH PELLET REASONER AND BUFFERING BEHAVIORS
+rosservice call /armor_interface_srv "armor_request:
+  client_name: 'tutorial'
+  reference_name: 'ontoTest'
+  command: 'LOAD'
+  primary_command_spec: 'FILE'
+  secondary_command_spec: ''
+  args: ['/root/Desktop/cluedo_ontology.owl', 'http://www.emarolab.it/cluedo-ontology', 'true', 'PELLET', 'true']"
+
+// 3. QUERY COMPLETED HYPOTHESES
+rosservice call /armor_interface_srv "armor_request:
+  client_name: 'tutorial'
+  reference_name: 'ontoTest'
+  command: 'QUERY'
+  primary_command_spec: 'IND'
+  secondary_command_spec: 'CLASS'
+  args: ['COMPLETED']"
+
+// 4. QUERY INCONSISTENT HYPOTHESES
+rosservice call /armor_interface_srv "armor_request:
+  client_name: 'tutorial'
+  reference_name: 'ontoTest'
+  command: 'QUERY'
+  primary_command_spec: 'IND'
+  secondary_command_spec: 'CLASS'
+  args: ['INCONSISTENT']"
+
+// 5. CONSISTENT HYPOTHESES ARE THE INTERSECTION BETWEEN THE RETURNING OF 3 AND 4 (e.g., HP0)
+
+// 6. QUERY THE DETAIL OF THE HYPOTHESES 
+rosservice call /armor_interface_srv "armor_request:
+  client_name: 'tutorial'
+  reference_name: 'ontoTest'
+  command: 'QUERY'
+  primary_command_spec: 'OBJECTPROP'
+  secondary_command_spec: 'IND'
+  args: ['who','HP0']"
+
+rosservice call /armor_interface_srv "armor_request:
+  client_name: 'tutorial'
+  reference_name: 'ontoTest'
+  command: 'QUERY'
+  primary_command_spec: 'OBJECTPROP'
+  secondary_command_spec: 'IND'
+  args: ['whaere','HP0']"
+
+rosservice call /armor_interface_srv "armor_request:
+  client_name: 'tutorial'
+  reference_name: 'ontoTest'
+  command: 'QUERY'
+  primary_command_spec: 'OBJECTPROP'
+  secondary_command_spec: 'IND'
+  args: ['what','HP0']"
+
+
+
+// 7. ADD A NEW HYPOTHESIS
+// 7.1. ADD `(HP3, Jim):who`
+rosservice call /armor_interface_srv "armor_request:
+  client_name: 'tutorial'
+  reference_name: 'ontoTest'
+  command: 'ADD'
+  primary_command_spec: 'OBJECTPROP'
+  secondary_command_spec: 'IND'
+  args: ['who','HP3','Jim']"
+
+// 7.2. ADD `Jim:PERSON`
+rosservice call /armor_interface_srv "armor_request:
+  client_name: 'tutorial'
+  reference_name: 'ontoTest'
+  command: 'ADD'
+  primary_command_spec: 'IND'
+  secondary_command_spec: 'CLASS'
+  args: ['Jim','PERSON']"
+
+// 7.3. ADD `(HP3, Gun):what`
+rosservice call /armor_interface_srv "armor_request:
+  client_name: 'tutorial'
+  reference_name: 'ontoTest'
+  command: 'ADD'
+  primary_command_spec: 'OBJECTPROP'
+  secondary_command_spec: 'IND'
+  args: ['what','HP3','Gun']"
+
+// 7.4. ADD `Gun:WEAPON`
+rosservice call /armor_interface_srv "armor_request:
+  client_name: 'tutorial'
+  reference_name: 'ontoTest'
+  command: 'ADD'
+  primary_command_spec: 'IND'
+  secondary_command_spec: 'CLASS'
+  args: ['Gun','WEAPON']"
+
+// 7.5. ADD `(HP3, Stadium):where`
+rosservice call /armor_interface_srv "armor_request:
+  client_name: 'tutorial'
+  reference_name: 'ontoTest'
+  command: 'ADD'
+  primary_command_spec: 'OBJECTPROP'
+  secondary_command_spec: 'IND'
+  args: ['where','HP3','Stadium']"
+
+// 7.6. ADD `Staidum:PLACE`
+rosservice call /armor_interface_srv "armor_request:
+  client_name: 'tutorial'
+  reference_name: 'ontoTest'
+  command: 'ADD'
+  primary_command_spec: 'IND'
+  secondary_command_spec: 'CLASS'
+  args: ['Stadium','PLACE']"
+
+
+// 8. MAKE IMPLICIT KNOWLEDGE EXPLICIT
+rosservice call /armor_interface_srv "armor_request:
+  client_name: 'tutorial'
+  reference_name: 'ontoTest'
+  command: 'REASON'
+  primary_command_spec: ''
+  secondary_command_spec: ''
+  args: []"
